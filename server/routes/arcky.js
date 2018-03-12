@@ -86,6 +86,17 @@ function handleMessage(sender_psid, received_message) {
     response = {
       "text": `Hello`
     }
+    request({
+      "uri": `https://graph.facebook.com/v2.6/${sender_psid}?fields=first_name,last_name,profile_pic`,
+      "qs": { "access_token": PAGE_ACCESS_TOKEN },
+      "method": "GET"
+    }, (err, res, body) => {
+      if (!err) {
+        console.log(body)
+      } else {
+        console.error("Unable to send message:" + err);
+      }
+    }); 
   }  else if (received_message.attachments) {
   
     // Gets the URL of the message attachment
