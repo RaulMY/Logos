@@ -86,12 +86,33 @@ router.post('/webhook', (req, res) => {
 // Handles messages events
 function handleMessage(sender_psid, received_message, user) {
   let response;
-
   // Check if the message contains text
   if (received_message.text) {    
-        response = {
-          "text": `Hello ${user.first_name}` 
+    response = {
+      "attachment": {
+        "type": "template",
+        "payload": {
+          "template_type": "generic",
+          "elements": [{
+            "title": `Hello ${user.first_name}, what do you need today?`,
+            "subtitle": "Tap a button to answer.",
+            "image_url": "../public/images/First.png",
+            "buttons": [
+              {
+                "type": "postback",
+                "title": "Tell me which zone is more profitable",
+                "payload": "yes",
+              },
+              {
+                "type": "postback",
+                "title": "I just wanted to talk",
+                "payload": "no",
+              }
+            ],
+          }]
         }
+      }
+  } 
   }  else if (received_message.attachments) {
   
     // Gets the URL of the message attachment
