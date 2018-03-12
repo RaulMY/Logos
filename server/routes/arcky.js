@@ -83,9 +83,7 @@ function handleMessage(sender_psid, received_message) {
 
   // Check if the message contains text
   if (received_message.text) {    
-    response = {
-      "text": `Hello`
-    }
+    
     request({
       "uri": `https://graph.facebook.com/v2.6/${sender_psid}?fields=first_name,last_name,profile_pic`,
       "qs": { "access_token": PAGE_ACCESS_TOKEN },
@@ -93,6 +91,9 @@ function handleMessage(sender_psid, received_message) {
     }, (err, res, body) => {
       if (!err) {
         console.log(body)
+        response = {
+          "text": `Hello`
+        }
       } else {
         console.error("Unable to send message:" + err);
       }
