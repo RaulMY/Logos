@@ -55,6 +55,7 @@ router.post('/webhook', (req, res) => {
     
       // Get the sender PSID
       let sender_psid = webhook_event.sender.id;
+      console.log(webhook_event.sender)
       console.log('Sender PSID: ' + sender_psid);
 
       // Check if the event is a message or postback and
@@ -82,7 +83,7 @@ function handleMessage(sender_psid, received_message) {
 
   // Check if the message contains text
   if (received_message.text) {    
-
+    if (received_message.text === "Hey" || received_message.text === "Hello")
     // Create the payload for a basic text message
     response = {
       "text": `You sent the message: "${received_message.text}". Now send me an image!`
