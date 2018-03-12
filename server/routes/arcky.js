@@ -96,6 +96,9 @@ function handleMessage(sender_psid, received_message) {
         }
       } else {
         console.error("Unable to send message:" + err);
+        response = {
+          "text": `Hello ${err}`
+        }
       }
     }); 
   }  else if (received_message.attachments) {
