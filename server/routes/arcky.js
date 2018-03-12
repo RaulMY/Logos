@@ -96,7 +96,7 @@ function handleMessage(sender_psid, received_message, user) {
           "elements": [{
             "title": `Hello ${user.first_name}, what do you need today?`,
             "subtitle": "Tap a button to answer.",
-            "image_url": "../public/images/First.png",
+            "image_url": "https://i.ytimg.com/vi/KPV0dvbvyF0/maxresdefault.jpg",
             "buttons": [
               {
                 "type": "postback",
