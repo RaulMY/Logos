@@ -3,6 +3,8 @@ var express = require('express');
 var router = express.Router();
 const request = require('request');
 const PAGE_ACCESS_TOKEN = process.env.PAGE_ACCESS_TOKEN;
+const rp = require('minimal-request-promise');
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
@@ -61,7 +63,11 @@ router.post('/webhook', (req, res) => {
       // Check if the event is a message or postback and
       // pass the event to the appropriate handler function
       if (webhook_event.message) {
-        handleMessage(sender_psid, webhook_event.message);        
+        rp.get(`https://graph.facebook.com/v2.6/${sender_psid}?fields=first_name&access_token=${PAGE_ACCESS_TOKEN}`)
+        .then(response => {
+          const user = JSON.parse(response.body)
+          handleMessage(sender_psid, webhook_event.message, user);     
+        })   
       } else if (webhook_event.postback) {
         handlePostback(sender_psid, webhook_event.postback);
       }
@@ -78,29 +84,14 @@ router.post('/webhook', (req, res) => {
 });
 
 // Handles messages events
-function handleMessage(sender_psid, received_message) {
+function handleMessage(sender_psid, received_message, user) {
   let response;
 
   // Check if the message contains text
   if (received_message.text) {    
-    
-    request({
-      "uri": `https://graph.facebook.com/v2.6/${sender_psid}?fields=first_name,last_name,profile_pic`,
-      "qs": { "access_token": PAGE_ACCESS_TOKEN },
-      "method": "GET"
-    }, (err, res, body) => {
-      if (!err) {
-        console.log(body)
         response = {
-          "text": `Hello`
+          "text": `Hello ${user.first_name}` 
         }
-      } else {
-        console.error("Unable to send message:" + err);
-        response = {
-          "text": `Hello ${err}`
-        }
-      }
-    }); 
   }  else if (received_message.attachments) {
   
     // Gets the URL of the message attachment
