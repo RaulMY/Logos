@@ -83,18 +83,21 @@ function handleMessage(sender_psid, received_message) {
 
   // Check if the message contains text
   if (received_message.text) {    
-    if (received_message.text === "Hey" || received_message.text === "Hello"){
-      // Create the payload for a basic text message
+    request({
+      "uri": "https://graph.facebook.com/v2.6/<PSID>?fields=first_name,last_name,profile_pic",
+      "qs": { "access_token": PAGE_ACCESS_TOKEN },
+      "method": "GET"
+    }, (err, res, body) => {
+      if (!err) {
+        console.log('message sent!')
+        console.log(res, body)
         response = {
-          "text": `You sent the message: "${received_message.text}". Now send me an image!`
+          "text": `Hello ${body.first_name}`
         }
-    } else {
-      // Create the payload for a basic text message
-    response = {
-      "text": `You sent the message: "${received_message.text}". Now send me an image!`
-    }
-    }
-    
+      } else {
+        console.error("Unable to send message:" + err);
+      }
+    });
   }  else if (received_message.attachments) {
   
     // Gets the URL of the message attachment
