@@ -90,9 +90,9 @@ function handleMessage(sender_psid, received_message) {
     }, (err, res, body) => {
       if (!err) {
         console.log('message sent!')
-        console.log(res, body)
+        console.log(res)
         response = {
-          "text": `Hello ${body.first_name}`
+          "text": `Hello`
         }
       } else {
         console.error("Unable to send message:" + err);
