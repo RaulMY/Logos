@@ -100,42 +100,13 @@ function handleMessage(sender_psid, received_message, user) {
             "buttons": [
               {
                 "type": "postback",
-                "title": "Tell me which zone is more profitable",
-                "payload": "yes",
+                "title": "Best Zone",
+                "payload": "Zone",
               },
               {
                 "type": "postback",
-                "title": "I just wanted to talk",
-                "payload": "no",
-              }
-            ],
-          }]
-        }
-      }
-  } 
-  }  else if (received_message.attachments) {
-  
-    // Gets the URL of the message attachment
-    let attachment_url = received_message.attachments[0].payload.url;
-    response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": "Is this the right picture?",
-            "subtitle": "Tap a button to answer.",
-            "image_url": attachment_url,
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Yes!",
-                "payload": "yes",
-              },
-              {
-                "type": "postback",
-                "title": "No!",
-                "payload": "no",
+                "title": "My progress",
+                "payload": "Target",
               }
             ],
           }]
@@ -155,10 +126,10 @@ function handlePostback(sender_psid, received_postback) {
   let payload = received_postback.payload;
 
   // Set the response based on the postback payload
-  if (payload === 'yes') {
-    response = { "text": "Thanks!" }
-  } else if (payload === 'no') {
-    response = { "text": "Oops, try sending another image." }
+  if (payload === 'Zone') {
+    response = { "text": "Right now X is the better zone!" }
+  } else if (payload === 'Target') {
+    response = { "text": "You have made 300 pesos tonight, 75% of your target" }
   }
   // Send the message to acknowledge the postback
   callSendAPI(sender_psid, response);
