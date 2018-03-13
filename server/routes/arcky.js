@@ -116,7 +116,7 @@ function handleMessage(sender_psid, received_message, user) {
       console.log(JSON.parse(body).response.venues)
       console.log(trend)
       let lat = trend.location.lat;
-      let long = trend.location.long;
+      let long = trend.location.lng;
       response = {
         "attachment": {
           "type": "template",
