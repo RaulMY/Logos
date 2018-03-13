@@ -112,7 +112,24 @@ function handleMessage(sender_psid, received_message, user) {
       }
   } 
 } else {
-  console.log(received_message.attachments[0].payload.coordinates)
+  let coords = received_message.attachments[0].payload.coordinates;
+  request({
+    url: 'https://api.foursquare.com/v2/venues/trending',
+    method: 'GET',
+    qs: {
+      client_id: 'G0ZVBQ54WV3H0M2M03TISVCME1QQU1QRVG53OQCASRCLGT2Q',
+      client_secret: 'TJVYRJNJGVIGZA4YPSXWUKI5EDIZQRBJJ15TMQJIIEORBX32',
+      ll: `${coords.lat}'${coords.long}`,
+      v: '20170801',
+      limit: 10
+    }
+  }, function(err, res, body) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log(JSON.parse(body).response.venues[0].name);
+    }
+  });
 }
   // Sends the response message
   callSendAPI(sender_psid, response);   
