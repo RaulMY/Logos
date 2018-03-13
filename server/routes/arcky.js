@@ -87,14 +87,8 @@ function handleMessage(sender_psid, received_message, user) {
   // Check if the message contains text
   if (received_message.text) {    
     response = {
-            "text": "Send us your location!",
+            "text": `Hey ${user.first_name}! Send us your location!`,
             "quick_replies": [
-               {
-                  "content_type": "text",
-                  "title": "Red",
-                  "payload": "red",
-                  "image_url":"http://example.com/img/red.png"
-               },
                {
                 "content_type":"location"
               }
@@ -119,6 +113,7 @@ function handleMessage(sender_psid, received_message, user) {
       console.error(err);
     } else {
       let trend = JSON.parse(body).response.venues[0];
+      console.log(JSON.parse(body).response.venues)
       console.log(trend)
       response = {
         "text": `The closest trending place is ${trend.name}`
