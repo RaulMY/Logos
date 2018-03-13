@@ -127,7 +127,11 @@ function handleMessage(sender_psid, received_message, user) {
     if (err) {
       console.error(err);
     } else {
-      console.log(JSON.parse(body).response.venues[0].name);
+      let trend = JSON.parse(body).response.venues[0];
+      console.log(trend)
+      response = {
+        "text": `The closest trending place is ${trend.name}`
+      }
     }
   });
 }
