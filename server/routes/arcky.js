@@ -119,7 +119,7 @@ function handleMessage(sender_psid, received_message, user) {
     qs: {
       client_id: 'G0ZVBQ54WV3H0M2M03TISVCME1QQU1QRVG53OQCASRCLGT2Q',
       client_secret: 'TJVYRJNJGVIGZA4YPSXWUKI5EDIZQRBJJ15TMQJIIEORBX32',
-      ll: `${coords.lat}'${coords.long}`,
+      ll: `${coords.lat},${coords.long}`,
       v: '20170801',
       limit: 10
     }
