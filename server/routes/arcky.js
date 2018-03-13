@@ -112,7 +112,7 @@ function handleMessage(sender_psid, received_message, user) {
       }
   } 
 } else {
-  console.log(received_message.attachments)
+  console.log(received_message.attachments[0].payload.coordinates)
 }
   // Sends the response message
   callSendAPI(sender_psid, response);   
