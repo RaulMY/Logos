@@ -87,8 +87,6 @@ function handleMessage(sender_psid, received_message, user) {
   // Check if the message contains text
   if (received_message.text) {    
     response = {
-      "data": {
-         "facebook": {
             "text": "Pick a color:",
             "quick_replies": [
                {
@@ -102,8 +100,6 @@ function handleMessage(sender_psid, received_message, user) {
                   "payload": "green"
                }
             ]
-         }
-      }
    }
 
   callSendAPI(sender_psid, response);  
