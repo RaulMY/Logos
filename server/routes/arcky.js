@@ -111,6 +111,8 @@ function handleMessage(sender_psid, received_message, user) {
         }
       }
   } 
+
+  callSendAPI(sender_psid, response);  
 } else {
   let coords = received_message.attachments[0].payload.coordinates;
   request({
@@ -132,11 +134,12 @@ function handleMessage(sender_psid, received_message, user) {
       response = {
         "text": `The closest trending place is ${trend.name}`
       }
+
+      callSendAPI(sender_psid, response);  
     }
   });
 }
-  // Sends the response message
-  callSendAPI(sender_psid, response);   
+  // Sends the response message 
 }
 
 // Handles messaging_postbacks events
