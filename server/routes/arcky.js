@@ -87,30 +87,24 @@ function handleMessage(sender_psid, received_message, user) {
   // Check if the message contains text
   if (received_message.text) {    
     response = {
-      "attachment": {
-        "type": "template",
-        "payload": {
-          "template_type": "generic",
-          "elements": [{
-            "title": `Hello ${user.first_name}, what do you need today?`,
-            "subtitle": "Tap a button to answer.",
-            "image_url": "https://i.ytimg.com/vi/KPV0dvbvyF0/maxresdefault.jpg",
-            "buttons": [
-              {
-                "type": "postback",
-                "title": "Best Zone",
-                "payload": "Zone",
-              },
-              {
-                "type": "postback",
-                "title": "My progress",
-                "payload": "Target",
-              }
-            ],
-          }]
-        }
+      "data": {
+         "facebook": {
+            "text": "Pick a color:",
+            "quick_replies": [
+               {
+                  "content_type": "text",
+                  "title": "Red",
+                  "payload": "red"
+               },
+               {
+                  "content_type": "text",
+                  "title": "Green",
+                  "payload": "green"
+               }
+            ]
+         }
       }
-  } 
+   }
 
   callSendAPI(sender_psid, response);  
 } else {
