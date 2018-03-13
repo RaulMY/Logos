@@ -87,18 +87,17 @@ function handleMessage(sender_psid, received_message, user) {
   // Check if the message contains text
   if (received_message.text) {    
     response = {
-            "text": "Pick a color:",
+            "text": "Send us your location!",
             "quick_replies": [
                {
                   "content_type": "text",
                   "title": "Red",
-                  "payload": "red"
+                  "payload": "red",
+                  "image_url":"http://example.com/img/red.png"
                },
                {
-                  "content_type": "text",
-                  "title": "Green",
-                  "payload": "green"
-               }
+                "content_type":"location"
+              }
             ]
    }
 
