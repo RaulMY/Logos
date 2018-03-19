@@ -1,0 +1,27 @@
+<div class="row">
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="title" type="text" class="validate" [(ngModel)] ="nuIdea.title">
+        <label for="title">Your idea in one sentence</label>
+      </div>
+    </div>
+        <label for="category">Choose a category</label>
+        <div class="options-container">
+        <input type="radio" name="category" id="finance" (change)='newValue(value)' value="finance" [(ngModel)]="value" /><label for="finance"><img src="http://localhost:1337/images/svg/finance.svg"><span>Finance</span></label>
+        <input type="radio" name="category" id="organization" (change)='newValue(value)' value="organization" [(ngModel)]="value"/><label for="organization"><img src="http://localhost:1337/images/svg/organization.svg"><span>Organization</span></label>
+        <input type="radio" name="category" id="social" (change)='newValue(value)' value="social" [(ngModel)]="value"/><label for="social"><img src="http://localhost:1337/images/svg/social.svg"><span>Social</span></label>
+        <input type="radio" name="category" id="crowdfunding" (change)='newValue(value)' value="crowdfunding" [(ngModel)]="value"/><label for="crowdfunding"><img src="http://localhost:1337/images/svg/crowdfunding.svg"><span>Crowdfunding</span></label>
+        <input type="radio" name="category" id="education" (change)='newValue(value)' value="education" [(ngModel)]="value"/><label for="education"><img src="http://localhost:1337/images/svg/education.svg"><span>Education</span></label>
+        <input type="radio" name="category" id="travel" (change)='newValue(value)' value="travel" [(ngModel)]="value"/><label for="travel"><img src="http://localhost:1337/images/svg/travel.svg"><span>Travel</span></label>
+        <input type="radio" name="category" id="food" (change)='newValue(value)' value="food" [(ngModel)]="value"/><label for="food"><img src="http://localhost:1337/images/svg/food.svg"><span>Food</span></label>
+        <input type="radio" name="category" id="gaming" (change)='newValue(value)' value="gaming" [(ngModel)]="value"/><label for="gaming"><img src="http://localhost:1337/images/svg/gaming.svg"><span>Gaming</span></label>
+        <input type="radio" name="category" id="other" (change)='newValue(value)' value="other" [(ngModel)]="value"/><label for="other"><img src="http://localhost:1337/images/svg/other.svg"><span>Other</span></label>
+        </div>
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="description" type="text" class="validate" [(ngModel)] ="nuIdea.description">
+        <label for="description">Describe it</label>
+      </div>
+    </div>
+    <div class="btn" (click)="create()">Share it!</div>
+</div>

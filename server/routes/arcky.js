@@ -124,7 +124,7 @@ function handleMessage(sender_psid, received_message, user) {
               "template_type": "generic",
               "elements": {
                   "element": {
-                      "title": `The closest place is ${trend.name}`,
+                      "title": `The closest trending place is ${trend.name}`,
                       "image_url": "https:\/\/maps.googleapis.com\/maps\/api\/staticmap?size=764x400&center="+lat+","+long+"&zoom=25&markers="+lat+","+long,
                       "item_url": "http:\/\/maps.apple.com\/maps?q="+lat+","+long+"&z=16"
                   }

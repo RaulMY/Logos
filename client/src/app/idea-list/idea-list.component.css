@@ -1,0 +1,31 @@
+.profile-container{
+    width: 90%;
+    margin: 10px 5%;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.centered{
+    width: 30%;
+    text-align: center;
+    margin: 0 35%;
+}
+
+.card{
+    width: 18%;
+    margin: 5px 1%;
+}
+
+.card img{
+    width: 100%;
+}
+
+.card-action{
+    text-align: center;
+}
+
+.card-title{
+    font-size: 0.9vw;
+    font-weight: bold;
+}

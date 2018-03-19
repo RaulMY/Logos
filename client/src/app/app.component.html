@@ -1,0 +1,36 @@
+    <nav> 
+        <div class="nav-wrapper">
+            <a [routerLink]="['']" class="brand-logo">Logos</a>
+            <a data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li *ngIf="!user" onclick="document.getElementById('id01').style.display='block'"><a>Log In</a></li>
+              <li *ngIf="user"><a [routerLink]="['profile']" >{{user.username}}</a></li>
+              <li *ngIf="user"><a [routerLink]="['new']">Share an Idea</a></li>
+              <li *ngIf="user" (click)="logout()"><a [routerLink]="['']" >Log Out</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+              <li *ngIf="!user" onclick="document.getElementById('id01').style.display='block'"><a>Log In</a></li>
+              <li *ngIf="user"><a [routerLink]="['profile']">{{user.username}}</a></li>
+              <li *ngIf="user"><a [routerLink]="['new']">Share an Idea</a></li>
+              <li *ngIf="user" (click)="logout()"><a [routerLink]="['']" >Log Out</a></li>
+            </ul>
+          </div>
+    </nav>
+  <div id="id01" class="modal" *ngIf="!user">
+      <span onclick="document.getElementById('id01').style.display='none'" 
+    class="close" title="Close Modal">&times;</span>
+    <form class="modal-content animate">
+      <h2> Login or Signup </h2>
+      <label> Username </label>
+      <input type="text" [(ngModel)]="formInfo.username" name="username"/>
+      <br>
+      <label> Password </label>
+      <input type="password" [(ngModel)]="formInfo.password" name="password"/>
+    
+      <button (click)="login()"> Log In </button>
+      <button (click)="signup()"> Sign Up </button>
+
+    <p class="error"> {{ error }} </p>
+    </form>  
+  </div>
+  <router-outlet></router-outlet>

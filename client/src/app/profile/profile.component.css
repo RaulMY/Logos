@@ -1,0 +1,48 @@
+#main-container{
+    width: 95%;
+    margin: 0 auto;
+}
+
+.profile-container{
+    width: 95%;
+    margin: 10px auto;
+    background-color: white;
+    display: flex;
+    border: 2px solid #5AB9EA;
+    border-radius: 10px;
+    align-items: center;
+}
+
+.profile-container img{
+    width: 20%;
+    margin: 10px 5%;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+#profile-info{
+    width: 45%;
+    margin: 10px 2.5%;
+}
+
+#profile-info span{
+    font-size: 2em;
+}
+
+#desc-area{
+    width: 90%;
+    height: 50%;
+}
+
+#profile-social{
+    width: 15%;
+    margin: 10px 2.5%;
+    display: flex;
+    flex-direction: column;
+}
+
+.centered{
+    width: 30%;
+    text-align: center;
+    margin: 0 35%;
+}
