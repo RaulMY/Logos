@@ -79,7 +79,6 @@ authRoutes.post('/signup', (req, res, next) => {
 
   authRoutes.post('/logout', (req, res, next) => {
     req.logout();
-    console.log(req.user, "hai");
     res.status(200).json({ message: 'Success' });
   });
 
@@ -87,6 +86,8 @@ authRoutes.post('/signup', (req, res, next) => {
     if (req.isAuthenticated()) {
       User.findById(req.user._id)
       .populate("ideas")
+      .populate("following")
+      .populate("comments")
       .then(user => res.status(200).json(user));
       
       return;

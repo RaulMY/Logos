@@ -1,3 +1,11 @@
-<p>
-  {{idea.title}}
-</p>
+<div>
+  <span>{{idea.title}}</span>
+  <p>{{idea.description}}</p>
+  <img [src]="'http://localhost:1337/'+idea.picPath+'.svg'" >
+  <span>{{idea.category}}</span>
+  <span>Followers: {{idea.followers.length}}</span>
+</div>
+
+<div>
+  <span>{{idea.authorId.username}}</span>
+</div>

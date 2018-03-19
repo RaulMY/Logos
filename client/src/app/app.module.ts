@@ -11,13 +11,15 @@ import { ProfileComponent } from './profile/profile.component';
 import { IdeaListComponent } from './idea-list/idea-list.component';
 import { CreateIdeaComponent } from './create-idea/create-idea.component';
 import { DisplayIdeaComponent } from './display-idea/display-idea.component';
+import { ContributeComponent } from './contribute/contribute.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home',  component: IdeaListComponent},
   { path: 'profile', component: ProfileComponent},
   { path: 'new', component: CreateIdeaComponent},
-  { path: ':id', component: DisplayIdeaComponent}
+  { path: ':id', component: DisplayIdeaComponent},
+  { path: ':id/contribute', component: ContributeComponent}
 ];
 
 @NgModule({
@@ -26,7 +28,8 @@ const routes: Routes = [
     ProfileComponent,
     IdeaListComponent,
     CreateIdeaComponent,
-    DisplayIdeaComponent
+    DisplayIdeaComponent,
+    ContributeComponent
   ],
   imports: [
     BrowserModule,

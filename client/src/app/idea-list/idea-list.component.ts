@@ -16,7 +16,8 @@ export class IdeaListComponent implements OnInit {
     picPath: '',
     ideas: [],
     following: [],
-    comments: []
+    comments: [],
+    _id: ''
   };
 
   ideaList = [];

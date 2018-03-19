@@ -44,6 +44,7 @@ router.get('/:id', function(req, res, next) {
     Idea.findById(req.params.id)
     .populate("comments")
     .populate("followers")
+    .populate("authorId")
     .then(lists=>{
         console.log(lists);
         res.status(200).json(lists);

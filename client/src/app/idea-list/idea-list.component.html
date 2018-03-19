@@ -9,11 +9,13 @@
         </div>
         <div class="card-content">
           <span class="card-title activator grey-text text-darken-4">{{idea.title}}<i class="material-icons right">more_vert</i></span>
-          <div *ngIf="user.following.indexOf(idea._id)==-1" (click)="follow(idea._id)" class="btn">Follow {{idea.followers.length}}</div>
-          <div *ngIf="user.following.indexOf(idea._id)!=-1" (click)="unfollow(idea._id)" class="btn">Followed {{idea.followers.length}}</div>
+          <div *ngIf="user.following.indexOf(idea._id)==-1 && user.username !== ''" (click)="follow(idea._id)" class="btn">Follow: {{idea.followers.length}}</div>
+          <div *ngIf="user.following.indexOf(idea._id)!=-1 && user.username !== ''" (click)="unfollow(idea._id)" class="btn">Followed: {{idea.followers.length}}</div>
+          <div *ngIf="user.username == ''" class="btn">Followers: {{idea.followers.length}}</div>
         </div>
         <div class="card-action">
-          <a>Contribute</a>
+          <a [routerLink]="['../', idea._id, 'contribute']">Contribute</a>
+          <a [routerLink]="['../', idea._id]">See more</a>
         </div>
         <div class="card-reveal">
           <span class="card-title grey-text text-darken-4">{{idea.title}}<i class="material-icons right">close</i></span>

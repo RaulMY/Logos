@@ -5,18 +5,20 @@ input[type=radio] {
 
 input[type=radio] + label {
     opacity: 0.5;
-    height: 50px;
-    width: 50px;
+    height: 100px;
+    width: 100px;
     display:inline-block;
     padding: 0 0 0 0px;
+    text-align: center
 }
 
 input[type=radio]:checked + label {
     opacity: 1;
-    height: 50px;
-    width: 50px;
+    height: 100px;
+    width: 100px;
     display:inline-block;
     padding: 0 0 0 0px;
+    text-align: center
 }
 
 
@@ -29,3 +31,5 @@ input[type=radio]:checked + label {
     justify-content: space-around;
     flex-wrap: wrap;
 }
+
+
