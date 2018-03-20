@@ -42,7 +42,6 @@ export class IdeaListComponent implements OnInit {
   }
 
   update() {
-    console.log("hello");
     this.session.isLoggedInHome()
       .subscribe(
         (user) => this.successCb(user)

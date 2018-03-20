@@ -1,3 +1,42 @@
-<p>
-  contribute works!
-</p>
+<div class="row">
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="comment" type="text" class="validate" [(ngModel)] ="contentComment">
+        <label for="commet">What do you think?</label>
+      </div>
+    </div>
+
+    <div class="btn" (click)="createComment()">Share it!</div>
+</div>
+
+<div class="row">
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="rec" type="text" class="validate" [(ngModel)] ="contentRec">
+        <label for="rec">Know of a useful technology/library/framework/API for this idea? Tell us about it</label>
+      </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+          <input id="linkRec" type="text" class="validate" [(ngModel)] ="linkRec">
+          <label for="linkRec">Link it!</label>
+        </div>
+      </div>
+    <div class="btn red" (click)="createRec()">Recommend it!</div>
+</div>
+
+<div class="row">
+    <div class="row">
+      <div class="input-field col s6">
+        <input id="similar" type="text" class="validate" [(ngModel)] ="contentSimilar">
+        <label for="similar">Know of a similar idea?</label>
+      </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s6">
+          <input id="linkSim" type="text" class="validate" [(ngModel)] ="linkSimilar">
+          <label for="linkSim">Link it!</label>
+        </div>
+      </div>
+    <div class="btn blue" (click)="createSim()">Share it!</div>
+</div>

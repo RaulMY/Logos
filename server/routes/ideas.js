@@ -40,6 +40,42 @@ router.post('/new', function(req, res, next) {
       });
 });
 
+router.post('/contribute', function(req, res, next) {
+    const comment = new Comment({
+        authorId: req.body.authorId,
+        ideaId: req.body.ideaId,
+        content: req.body.content,
+        type: req.body.type,
+        link: req.body.link,
+        rating: 0
+      });
+      comment.save((err) => {
+        User.findById(req.body.authorId, (error, user) => {
+            if (error) {
+                next(error);
+            } else {
+              let array=user.comments
+              array.push(comment._id)
+              user.comments= array;
+              user.save((err) => {
+                Idea.findById(req.body.ideaId, (error, idea) => {
+                    if (error) {
+                        next(error);
+                    } else {
+                      let array=idea.comments
+                      array.push(comment._id)
+                      idea.comments= array;
+                        idea.save()
+                        .then(list=>res.status(201).json(list))
+                        .catch(e=>res.status(500).send(e));
+                    }
+                })
+              });
+            }
+        })
+      });
+});
+
 router.get('/:id', function(req, res, next) {
     Idea.findById(req.params.id)
     .populate("comments")

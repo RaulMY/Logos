@@ -1,0 +1,49 @@
+.idea-container{
+    display: flex;
+    width: 45%;
+    padding:  5px 2.5%;
+    margin: 10px 2.5%;
+    justify-content: space-around;
+}
+
+.idea-container img{
+    width: 30%;
+}
+
+.info-container{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.low-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#main-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.upper-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.idea{
+    width: 30%;
+    margin: 5px 1.5%;
+    text-align: center;
+}
+
+.comment-container{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    padding:  5px 2.5%;
+    margin: 10px 2.5%;
+}

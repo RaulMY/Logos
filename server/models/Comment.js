@@ -3,9 +3,10 @@ const Schema       = mongoose.Schema;
 
 const commentSchema = new Schema({
   authorId: String,
-  commentId: String,
+  ideaId: String,
   content: String,
   type: String,
+  link: String,
   rating: Number
 }, {
     timestamps:{

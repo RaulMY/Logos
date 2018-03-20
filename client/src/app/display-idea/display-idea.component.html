@@ -1,11 +1,68 @@
-<div>
-  <span>{{idea.title}}</span>
-  <p>{{idea.description}}</p>
-  <img [src]="'http://localhost:1337/'+idea.picPath+'.svg'" >
-  <span>{{idea.category}}</span>
-  <span>Followers: {{idea.followers.length}}</span>
-</div>
+<div id="main-container">
+  <div class="idea-container card">
+      <img [src]="'http://localhost:1337/'+idea.picPath+'.svg'" alt="Wait for it">
+    
+    <div class="info-container">  
+      <span><b>{{idea.title}}</b> by <b>{{idea.authorId.username}}</b></span>
+      <p>{{idea.description}}</p>
+      <div class="low-container">
+    <div class="btn blue">Contact</div>
+    <div class="btn green">Follow | {{idea.followers.length}}</div>
+      </div>
+    </div>
+  </div>
 
-<div>
-  <span>{{idea.authorId.username}}</span>
+  <div class="comment-container card">
+    <div class="upper-container">
+      <h5>Top Contributions</h5>
+      <div class="btn blue">See All</div>
+    </div>
+    <div class="low-container">
+      <div class="idea card">
+        {{contributions[0].content}}
+      </div>
+      <div class="idea card">
+          {{contributions[1].content}}        
+      </div>
+      <div class="idea card">
+          {{contributions[2].content}}
+      </div>
+    </div>
+  </div>
+
+  <div class="comment-container card">
+      <div class="upper-container">
+        <h5>Similar Projects</h5>
+        <div class="btn blue">See All</div>
+      </div>
+      <div class="low-container">
+        <div class="idea card">
+          {{similars[0].content}}
+        </div>
+        <div class="idea card">
+            {{similars[1].content}}        
+        </div>
+        <div class="idea card">
+            {{similars[2].content}}
+        </div>
+      </div>
+    </div>
+
+    <div class="comment-container card">
+        <div class="upper-container">
+          <h5>Recommendations</h5>
+          <div class="btn blue">See All</div>
+        </div>
+        <div class="low-container">
+          <div class="idea card">
+            {{recs[0].content}}
+          </div>
+          <div class="idea card">
+              {{recs[1].content}}        
+          </div>
+          <div class="idea card">
+              {{recs[2].content}}
+          </div>
+        </div>
+      </div>
 </div>

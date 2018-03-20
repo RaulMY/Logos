@@ -50,4 +50,10 @@ option = { withCredentials: true};
       .map(res => res.json())
       .catch(this.handleError);
   }
+
+  newComment(comment) {
+    return this.http.post(`http://localhost:1337/ideas/contribute`, comment, this.option)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
 }

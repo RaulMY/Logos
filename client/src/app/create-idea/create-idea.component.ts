@@ -64,7 +64,6 @@ export class CreateIdeaComponent implements OnInit {
   }
 
   newValue(value) {
-    console.log(value);
     this.nuIdea.category = value;
   }
 

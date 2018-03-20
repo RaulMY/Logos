@@ -32,8 +32,40 @@ export class DisplayIdeaComponent implements OnInit {
     ratings: [],
     followers: [],
     similar: [],
-    picPath: ''
+    picPath: 'images/svg/other'
   };
+
+  contributions = [
+    {content: 'Hey, we still need a comment!'},
+    {content: 'Hey, we still need a comment!'},
+    {content: 'Hey, we still need a comment!'}
+  ];
+  similars = [
+    {
+      content: 'Nothing here yet!',
+      link: '#'
+    },
+    {
+      content: 'Nothing here yet!',
+      link: '#'
+    },
+    {
+      content: 'Nothing here yet!',
+      link: '#'
+    }];
+  recs = [
+    {
+      content: 'Nothing here yet!',
+      link: '#'
+    },
+    {
+      content: 'Nothing here yet!',
+      link: '#'
+    },
+    {
+      content: 'Nothing here yet!',
+      link: '#'
+    }];
 
   constructor(private session: SessionService, private router: Router, private ideas: IdeasService, private route: ActivatedRoute ) { }
 
@@ -44,8 +76,23 @@ export class DisplayIdeaComponent implements OnInit {
       );
     this.ideas.getIdea(this.route.snapshot.params['id'])
     .subscribe(
-      (list) => this.idea = list
-      );
+      (list) => {this.idea = list;
+        list.comments.forEach(comment => {
+          if (comment.type  === 'comment') {
+            this.contributions.unshift(comment);
+          }
+        });
+        list.comments.forEach(comment => {
+          if (comment.type  === 'sim') {
+            this.similars.unshift(comment);
+          }
+        });
+        list.comments.forEach(comment => {
+          if (comment.type  === 'red') {
+            this.recs.unshift(comment);
+          }
+        });
+      });
   }
 
   successCb(user) {

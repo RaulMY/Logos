@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import { SessionService } from '../services/session.service';
+import { IdeasService } from '../services/ideas.service';
+import {FormsModule} from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-contribute',
@@ -7,9 +12,127 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContributeComponent implements OnInit {
 
-  constructor() { }
+  user = {
+    username: '',
+    description: '',
+    picPath: '',
+    ideas: [],
+    following: [],
+    comments: []
+  };
+
+  nuComment = {
+    authorId: '',
+    content: '',
+    ideaId: this.route.snapshot.params['id'],
+    type: '',
+    link: ''
+  };
+
+  contentComment = '';
+  contentRec = '';
+  contentSimilar = '';
+  linkRec = '';
+  linkSimilar = '';
+
+  idea = {
+    title: '',
+    description: '',
+    authorId: {
+      username: '',
+      picPath: ''
+    },
+    category: '',
+    comments: [],
+    ratings: [],
+    followers: [],
+    similar: [],
+    picPath: 'images/svg/other'
+  };
+
+  constructor(private session: SessionService, private router: Router, private ideas: IdeasService, private route: ActivatedRoute ) { }
 
   ngOnInit() {
+    this.session.isLoggedIn()
+      .subscribe(
+        (user) => this.successCb(user)
+      );
+      this.ideas.getIdea(this.route.snapshot.params['id'])
+      .subscribe(
+        (list) => {this.idea = list;
+          console.log(list);
+        });
   }
+
+  successCb(user) {
+    this.user = user;
+    this.nuComment.authorId = user._id;
+  }
+
+  update() {
+    this.session.isLoggedIn()
+      .subscribe(
+        (user) => this.successCb(user)
+      );
+      this.ideas.getIdea(this.route.snapshot.params['id'])
+      .subscribe(
+        (list) => {this.idea = list;
+          console.log(list);
+        });
+  }
+
+  createComment() {
+    this.nuComment.type = 'comment';
+    this.nuComment.content = this.contentComment;
+    this.ideas.newComment(this.nuComment)
+    .subscribe(
+      (nuComment) => {
+        this.nuComment = {
+          authorId: '',
+          content: '',
+          link: '',
+          ideaId: this.route.snapshot.params['id'],
+          type: ''
+        };
+      }
+    );
+  }
+
+  createRec() {
+    this.nuComment.type = 'rec';
+    this.nuComment.content = this.contentRec;
+    this.nuComment.link = this.linkRec;
+    this.ideas.newComment(this.nuComment)
+    .subscribe(
+      (nuComment) => {
+        this.nuComment = {
+          authorId: '',
+          content: '',
+          link: '',
+          ideaId: this.route.snapshot.params['id'],
+          type: ''
+        };
+      }
+    );
+  }
+
+  createSim() {
+    this.nuComment.type = 'sim';
+    this.nuComment.content = this.contentSimilar;
+    this.nuComment.link = this.linkSimilar;
+    this.ideas.newComment(this.nuComment)
+    .subscribe(
+      (nuComment) => {
+        this.nuComment = {
+          authorId: '',
+          content: '',
+          link: '',
+          ideaId: this.route.snapshot.params['id'],
+          type: ''
+        };
+      }
+    );
+  }
+
 
 }
