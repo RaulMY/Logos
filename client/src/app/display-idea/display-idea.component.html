@@ -62,7 +62,7 @@
       </div>
       <div *ngIf="!allSim" class="low-container">
             <div class="idea card" *ngFor="let comment of similars.slice(0,3)">
-              {{comment.content}}
+                <a [href]="comment.link">{{comment.content}}</a>
               <div class="low-container">
                   <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
                   <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
@@ -72,7 +72,7 @@
     </div>
     <div *ngIf="allSim" class="low-container">
             <div class="idea card" *ngFor="let comment of similars">
-              {{comment.content}}
+                <a [href]="comment.link">{{comment.content}}</a>
               <div class="low-container">
                   <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
                   <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
@@ -89,7 +89,7 @@
         </div>
         <div *ngIf="!allRec" class="low-container">
                 <div class="idea card" *ngFor="let comment of recs.slice(0,3)">
-                  {{comment.content}}
+                    <a [href]="comment.link">{{comment.content}}</a>
                   <div class="low-container">
                       <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
                       <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
@@ -99,7 +99,7 @@
               </div>
               <div *ngIf="allRec" class="low-container">
                     <div class="idea card" *ngFor="let comment of recs">
-                      {{comment.content}}
+                        <a [href]="comment.link">{{comment.content}}</a>
                       <div class="low-container">
                           <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
                           <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>

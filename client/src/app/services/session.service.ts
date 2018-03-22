@@ -16,50 +16,50 @@ option = { withCredentials: true};
   signup(user) {
 
     console.log(user);
-    return this.http.post(`http://localhost:1337/auth/signup`, user, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/auth/signup`, user, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   login(user) {
     console.log(user);
-    return this.http.post(`http://localhost:1337/auth/login`, user, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/auth/login`, user, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   logout() {
-    return this.http.post(`http://localhost:1337/auth/logout`, {})
+    return this.http.post(`http://logosapp.herokuapp.com/auth/logout`, {})
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   isLoggedIn() {
-    return this.http.get(`http://localhost:1337/auth/loggedin`, this.option)
+    return this.http.get(`http://logosapp.herokuapp.com/auth/loggedin`, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getUser(id) {
-    return this.http.get(`http://localhost:1337/auth/user/${id}`, this.option)
+    return this.http.get(`http://logosapp.herokuapp.com/auth/user/${id}`, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   updateUser(id, info) {
-    return this.http.post(`http://localhost:1337/auth/user/${id}`, info, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/auth/user/${id}`, info, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   isLoggedInHome() {
-    return this.http.get(`http://localhost:1337/auth/loggedinhome`, this.option)
+    return this.http.get(`http://logosapp.herokuapp.com/auth/loggedinhome`, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getPrivateData() {
-    return this.http.get(`http://localhost:1337/auth/private`, this.option)
+    return this.http.get(`http://logosapp.herokuapp.com/auth/private`, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }

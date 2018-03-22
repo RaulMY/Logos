@@ -14,19 +14,19 @@ option = { withCredentials: true};
   }
 
   newIdea(idea) {
-    return this.http.post(`http://localhost:1337/ideas/new`, idea, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/ideas/new`, idea, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getIdeas() {
-    return this.http.get(`http://localhost:1337/ideas`, this.option)
+    return this.http.get(`http://logosapp.herokuapp.com/ideas`, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   getIdea(id) {
-    return this.http.get(`http://localhost:1337/ideas/${id}`, this.option)
+    return this.http.get(`http://logosapp.herokuapp.com/ideas/${id}`, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
@@ -36,7 +36,7 @@ option = { withCredentials: true};
       id: ideaId,
       userid: userId
     };
-    return this.http.post(`http://localhost:1337/ideas/follow`, message, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/ideas/follow`, message, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
@@ -46,43 +46,43 @@ option = { withCredentials: true};
       id: ideaId,
       userid: userId
     };
-    return this.http.post(`http://localhost:1337/ideas/unfollow`, message, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/ideas/unfollow`, message, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   newComment(comment) {
-    return this.http.post(`http://localhost:1337/ideas/contribute`, comment, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/ideas/contribute`, comment, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   sendMessage(message) {
-    return this.http.post(`http://localhost:1337/ideas/contact`, message, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/ideas/contact`, message, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   rateUp(commentId, authorId) {
-    return this.http.get(`http://localhost:1337/ideas/rateup/${commentId}/${authorId}`, this.option)
+    return this.http.get(`http://logosapp.herokuapp.com/ideas/rateup/${commentId}/${authorId}`, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   rateDown(commentId, authorId) {
-    return this.http.get(`http://localhost:1337/ideas/ratedown/${commentId}/${authorId}`, this.option)
+    return this.http.get(`http://logosapp.herokuapp.com/ideas/ratedown/${commentId}/${authorId}`, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   updateIdea(id, info) {
-    return this.http.post(`http://localhost:1337/ideas/${id}`, info, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/ideas/${id}`, info, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
 
   notify(id, notification) {
-    return this.http.post(`http://localhost:1337/ideas/${id}/notify`, notification, this.option)
+    return this.http.post(`http://logosapp.herokuapp.com/ideas/${id}/notify`, notification, this.option)
       .map(res => res.json())
       .catch(this.handleError);
   }
