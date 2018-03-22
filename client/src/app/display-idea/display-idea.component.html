@@ -1,6 +1,6 @@
 <div id="main-container" *ngIf="!contact">
   <div class="idea-container card">
-      <img [src]="'http://localhost:1337/'+idea.picPath+'.svg'" alt="Wait for it">
+      <img [src]="'http://arcky.herokuapp.com/'+idea.picPath+'.svg'" alt="Wait for it">
     
     <div *ngIf="!edit" class="info-container">  
       <span><b>{{idea.title}}</b> by <a [routerLink]="['../user', idea.authorId._id]"><b>{{idea.authorId.username}}</b></a></span>
