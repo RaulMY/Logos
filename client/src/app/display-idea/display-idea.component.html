@@ -110,14 +110,15 @@
     </div>
 </div>
 <div *ngIf="contact" class="contact-form">
+  <h4>Conctact the creator of this idea!</h4>
         <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field">
                   <input id="similar" type="text" class="validate" [(ngModel)] ="message.title">
                   <label for="similar">Subject</label>
                 </div>
               </div>
               <div class="row">
-                  <div class="input-field col s6">
+                  <div class="input-field">
                     <input id="linkSim" type="text" class="validate" [(ngModel)] ="message.content">
                     <label for="linkSim">What do you want to say?</label>
                   </div>

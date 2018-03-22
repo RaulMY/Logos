@@ -25,8 +25,11 @@ export class CreateIdeaComponent implements OnInit {
     authorId: '',
     description: '',
     title: '',
-    category: ''
+    category: '',
+    tags: []
   };
+
+  tags = '';
 
   constructor(private session: SessionService, private router: Router, private ideas: IdeasService ) { }
 
@@ -50,6 +53,7 @@ export class CreateIdeaComponent implements OnInit {
   }
 
   create() {
+    this.nuIdea.tags = this.tags.toLowerCase().split(' ');
     this.ideas.newIdea(this.nuIdea)
     .subscribe(
       (idea) => {
@@ -57,8 +61,10 @@ export class CreateIdeaComponent implements OnInit {
           authorId: '',
           description: '',
           title: '',
-          category: ''
+          category: '',
+          tags: []
         };
+        this.tags = '';
       }
     );
   }

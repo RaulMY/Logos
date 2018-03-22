@@ -1,12 +1,12 @@
-<div class="row">
-    <div class="row">
-      <div class="input-field col s6">
+<div class="main-container">
+    <div class="row segment">
+      <div class="input-field">
         <input id="title" type="text" class="validate" [(ngModel)] ="nuIdea.title">
         <label for="title">Your idea in one sentence</label>
       </div>
     </div>
         <label for="category">Choose a category</label>
-        <div class="options-container">
+        <div class="options-container segment">
         <input type="radio" name="category" id="finance" (change)='newValue(value)' value="finance" [(ngModel)]="value" /><label for="finance"><img src="http://localhost:1337/images/svg/finance.svg"><span>Finance</span></label>
         <input type="radio" name="category" id="organization" (change)='newValue(value)' value="organization" [(ngModel)]="value"/><label for="organization"><img src="http://localhost:1337/images/svg/organization.svg"><span>Organization</span></label>
         <input type="radio" name="category" id="social" (change)='newValue(value)' value="social" [(ngModel)]="value"/><label for="social"><img src="http://localhost:1337/images/svg/social.svg"><span>Social</span></label>
@@ -18,11 +18,18 @@
         <input type="radio" name="category" id="ecommerce" (change)='newValue(value)' value="ecommerce" [(ngModel)]="value"/><label for="ecommerce"><img src="http://localhost:1337/images/svg/ecommerce.svg"><span>E-commerce</span></label>
         <input type="radio" name="category" id="other" (change)='newValue(value)' value="other" [(ngModel)]="value"/><label for="other"><img src="http://localhost:1337/images/svg/other.svg"><span>Other</span></label>
         </div>
-    <div class="row">
-      <div class="input-field col s6">
+        <br>
+    <div class="row segment">
+      <div class="input-field">
         <input id="description" type="text" class="validate" [(ngModel)] ="nuIdea.description">
-        <label for="description">Describe it</label>
+        <label for="description">Explain it a bit more here</label>
       </div>
     </div>
+    <div class="row segment">
+        <div class="input-field">
+          <input id="tags" type="text" class="validate" [(ngModel)] ="tags">
+          <label for="tags">Write a few tags (eg: finance, uber, travel)</label>
+        </div>
+      </div>
     <div class="btn" (click)="create()">Share it!</div>
 </div>

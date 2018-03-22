@@ -86,3 +86,11 @@ input[type=radio]:checked + label {
 [type="radio"]+label:before, [type="radio"]:not(.filled-in)+label:after{
     display: none;
 }
+
+.notifications-container{
+    margin: 10px 2%;
+}
+
+.card{
+    padding: 10px;
+}

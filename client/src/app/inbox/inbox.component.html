@@ -1,0 +1,12 @@
+<div class="main-container" *ngIf="user.username!=''">
+  <div class="message-container" *ngFor="let message of user.messages">
+    <h4>{{message.title}}</h4>
+    <p>{{message.content}}</p>
+    <button class="btn green" (click)="reply(i)">Reply</button>
+    <br>
+    <label>Subject</label>
+    <input [(ngModel)]="newMessage.title">
+    <label>What do you wanna reply?</label>
+    <input [(ngModel)]="newMessage.content">
+  </div>
+</div>

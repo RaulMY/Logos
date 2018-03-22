@@ -3,11 +3,11 @@ import { SessionService } from '../services/session.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  selector: 'app-inbox',
+  templateUrl: './inbox.component.html',
+  styleUrls: ['./inbox.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class InboxComponent implements OnInit {
 
   user = {
     username: '',
@@ -15,12 +15,16 @@ export class ProfileComponent implements OnInit {
     picPath: '',
     ideas: [],
     following: [],
-    comments: []
+    comments: [],
+    _id: '',
+    messages: []
   };
 
-  loggedUser = {};
+  newMessage = {
+    title: '',
+    content: ''
+  };
 
-  edit = false;
 
   constructor(private session: SessionService, private router: Router, private route: ActivatedRoute) { }
 
@@ -37,29 +41,12 @@ export class ProfileComponent implements OnInit {
   }
 
   successCb(user) {
-    this.loggedUser = user;
+    this.user = user;
   }
 
-  editChange() {
-    if (this.edit) {
-      this.edit = false;
-    } else {
-      this.edit = true;
-    }
-    console.log(this.edit);
+  toggleReply(i) {
+    console.log(i);
   }
 
-  saveChange() {
-    if (this.edit) {
-      this.edit = false;
-    } else {
-      this.edit = true;
-    }
-    this.session.updateUser(this.route.snapshot.params['userid'], this.user).subscribe();
-  }
-
-  newValue(value) {
-    this.user.picPath = `images/avatars/user-${value}.svg`;
-  }
 
 }

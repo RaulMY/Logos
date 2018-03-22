@@ -32,6 +32,9 @@ export class IdeaListComponent implements OnInit {
     this.ideas.getIdeas()
     .subscribe(
       (list) => {this.ideaList = list;
+        this.ideaList.sort(function(a, b) {
+          return b.followers.length - a.followers.length;
+        });
     console.log(this.ideaList);
   });
   }
@@ -48,8 +51,12 @@ export class IdeaListComponent implements OnInit {
       );
     this.ideas.getIdeas()
     .subscribe(
-      (list) => this.ideaList = list
-      );
+      (list) => {this.ideaList = list;
+        this.ideaList.sort(function(a, b) {
+          return b.followers.length - a.followers.length;
+        });
+    console.log(this.ideaList);
+  });
   }
 
   follow(id) {

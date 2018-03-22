@@ -8,9 +8,10 @@ const ideaSchema = new Schema({
   category: String,
   picPath: String,
   comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  ratings: [],
+  ratings: { risk: Number, commercial: Number, analytical: Number},
   followers : [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  similar : []
+  similar : [],
+  tags: []
 }, {
     timestamps:{
         createdAt: "created_at",

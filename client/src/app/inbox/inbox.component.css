@@ -1,0 +1,9 @@
+.main-container{
+    margin: 10px 10%;
+}
+
+.message-container{
+    border: 2px grey solid;
+    border-radius: 5px;
+    padding: 10px 5%;
+}

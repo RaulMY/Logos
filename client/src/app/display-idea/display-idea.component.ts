@@ -77,15 +77,24 @@ export class DisplayIdeaComponent implements OnInit {
             this.contributions.unshift(comment);
           }
         });
+        this.contributions.sort(function(a, b) {
+          return b.rating.length - a.rating.length;
+        });
         list.comments.forEach(comment => {
           if (comment.type  === 'sim') {
             this.similars.unshift(comment);
           }
         });
+        this.similars.sort(function(a, b) {
+          return b.rating.length - a.rating.length;
+        });
         list.comments.forEach(comment => {
           if (comment.type  === 'red') {
             this.recs.unshift(comment);
           }
+        });
+        this.recs.sort(function(a, b) {
+          return b.rating.length - a.rating.length;
         });
       });
   }

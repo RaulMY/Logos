@@ -13,11 +13,13 @@ import { CreateIdeaComponent } from './create-idea/create-idea.component';
 import { DisplayIdeaComponent } from './display-idea/display-idea.component';
 import { ContributeComponent } from './contribute/contribute.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home',  component: IdeaListComponent},
   { path: 'new', component: CreateIdeaComponent},
+  { path: 'inbox', component: InboxComponent},
   { path: ':id', component: DisplayIdeaComponent},
   { path: ':id/contribute', component: ContributeComponent},
   { path: 'user/:userid', component: ProfileComponent}
@@ -31,7 +33,8 @@ const routes: Routes = [
     CreateIdeaComponent,
     DisplayIdeaComponent,
     ContributeComponent,
-    DashboardComponent
+    DashboardComponent,
+    InboxComponent
   ],
   imports: [
     BrowserModule,

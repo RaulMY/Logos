@@ -5,12 +5,14 @@
             <ul class="right hide-on-med-and-down">
               <li *ngIf="!user" onclick="document.getElementById('id01').style.display='block'"><a>Log In</a></li>
               <li *ngIf="user"><a [routerLink]="['user', user._id]" >{{user.username}}<span class="new badge">{{user.notifications.length}}</span></a></li>
+              <li *ngIf="user"><a [routerLink]="['inbox']">Inbox <span class="blue badge">{{user.messages.length}}</span></a></li>
               <li *ngIf="user"><a [routerLink]="['new']">Share an Idea</a></li>
               <li *ngIf="user" (click)="logout()"><a [routerLink]="['']" >Log Out</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
               <li *ngIf="!user" onclick="document.getElementById('id01').style.display='block'"><a>Log In</a></li>
               <li *ngIf="user"><a [routerLink]="['user', user._id]">{{user.username}}<span class="new badge">{{user.notifications.length}}</span></a></li>
+              <li *ngIf="user"><a [routerLink]="['inbox']">Inbox <span class="blue badge">{{user.messages.length}}</span></a></li>
               <li *ngIf="user"><a [routerLink]="['new']">Share an Idea</a></li>
               <li *ngIf="user" (click)="logout()"><a [routerLink]="['']" >Log Out</a></li>
             </ul>

@@ -11,6 +11,10 @@
         <p>{{user.description}}</p>
       </div>
     </div>
+    <div class="notifications-container" *ngIf="loggedUser._id==user._id">
+      <h5>Notifications</h5>
+        <span *ngFor="let not of loggedUser.notifications">{{not.content}}</span>
+      </div>
   </div>
   <div *ngIf="edit" class="profile-container">
       <img *ngIf="user.picPath" [alt]="user.username" [src]="'http://localhost:1337/'+user.picPath" >
@@ -53,22 +57,23 @@
   <h3>Ideas</h3>
   <div class="profile-container">
     <span class="centered" *ngIf="user.ideas.length === 0">No Ideas so far, share one!</span>
-    <ul *ngFor="let idea of user.ideas">
+    <ul class="card" *ngFor="let idea of user.ideas">
+      
       <a [routerLink]="['../../', idea._id]">{{idea.title}}</a>
     </ul>
   </div>
   <h3>Following</h3>
   <div class="profile-container">
     <span class="centered" *ngIf="user.following.length === 0">No Ideas so far, find one you like!</span>
-    <ul *ngFor="let idea of user.following">
-      <li>{{idea.title}}</li>
+    <ul class="card" *ngFor="let idea of user.following">
+        <a [routerLink]="['../../', idea._id]">{{idea.title}}</a>
     </ul>
   </div>
   <h3>Contributions</h3>
   <div class="profile-container">
     <span class="centered" *ngIf="user.comments.length === 0">No Contributions so far, go validate some!</span>
-    <ul *ngFor="let comment of user.comments">
-      <li>{{comment.name}}</li>
+    <ul class="card" *ngFor="let comment of user.comments">
+        <a [routerLink]="['../../', comment.authorId]">{{comment.content}}</a>
     </ul>
   </div>
 </div>

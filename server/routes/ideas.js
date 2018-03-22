@@ -52,7 +52,8 @@ router.post('/new', function(req, res, next) {
         title: req.body.title,
         category: req.body.category,
         description: req.body.description,
-        picPath: `/images/svg/${req.body.category}`   
+        picPath: `/images/svg/${req.body.category}`,
+        tags: req.body.tags   
       });
        console.log(idea)
       idea.save((err) => {
@@ -153,16 +154,6 @@ router.get('/:id', function(req, res, next) {
     })
 });
 
-router.post('/:id', function(req, res, next) {
-    Idea.findById(req.params.id)
-    .then(idea=>{
-        idea.title = req.body.title;
-        idea.description = req.body.description;
-        idea.save()
-        .then(ideaUp =>res.status(200).json(ideaUp))
-    })
-});
-
 router.post('/follow', function(req, res, next) {
     Idea.findById(req.body.id)
     .then(idea=>{
@@ -203,4 +194,13 @@ router.post('/unfollow', function(req, res, next) {
     })
 });
 
+router.post('/:id', function(req, res, next) {
+    Idea.findById(req.params.id)
+    .then(idea=>{
+        idea.title = req.body.title;
+        idea.description = req.body.description;
+        idea.save()
+        .then(ideaUp =>res.status(200).json(ideaUp))
+    })
+});
 module.exports = router;
