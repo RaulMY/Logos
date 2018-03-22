@@ -13,7 +13,8 @@ const userSchema = new Schema({
   password: String, 
   following: [{ type: Schema.Types.ObjectId, ref: 'Idea' }],
   comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
-  messages: []
+  messages: [],
+  notifications: []
 });
 
 

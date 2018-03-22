@@ -2,14 +2,30 @@
   <div class="idea-container card">
       <img [src]="'http://localhost:1337/'+idea.picPath+'.svg'" alt="Wait for it">
     
-    <div class="info-container">  
+    <div *ngIf="!edit" class="info-container">  
       <span><b>{{idea.title}}</b> by <a [routerLink]="['../user', idea.authorId._id]"><b>{{idea.authorId.username}}</b></a></span>
       <p>{{idea.description}}</p>
       <div class="low-container">
-    <div class="btn blue" (click)="toggleContact()">Contact</div>
-    <div class="btn green">Follow | {{idea.followers.length}}</div>
+    <div *ngIf="user._id != idea.authorId._id && user.username !== ''" class="btn blue" (click)="toggleContact()">Contact</div>
+    <div *ngIf="idea.followers.indexOf(user._id)==-1 && user.username !== ''" class="btn green" (click)="follow()">Follow | {{idea.followers.length}}</div>
+    <div *ngIf="idea.followers.indexOf(user._id)!=-1 && user.username !== ''" class="btn green" (click)="unfollow()">Following | {{idea.followers.length}}</div>
+    <div *ngIf="user._id != idea.authorId._id && user.username !== ''" [routerLink]="['../', idea._id, 'contribute']" class="btn orange">Contribute</div>
+    <div *ngIf="user._id === idea.authorId._id && user.username !== ''" (click)="editChange()" class="btn red">Edit Idea</div>
       </div>
     </div>
+    <div *ngIf="edit" class="info-container">  
+            <label>Idea Title</label>
+            <input [(ngModel)]="idea.title">  
+            <label>Describe your idea</label>
+            <input [(ngModel)]="idea.description">
+            <div class="low-container">
+          <div *ngIf="user._id != idea.authorId._id && user.username !== ''" class="btn blue" (click)="toggleContact()">Contact</div>
+          <div *ngIf="idea.followers.indexOf(user._id)==-1 && user.username !== ''" class="btn green" (click)="follow()">Follow | {{idea.followers.length}}</div>
+          <div *ngIf="idea.followers.indexOf(user._id)!=-1 && user.username !== ''" class="btn green" (click)="unfollow()">Following | {{idea.followers.length}}</div>
+          <div *ngIf="user._id != idea.authorId._id && user.username !== ''" [routerLink]="['../', idea._id, 'contribute']" class="btn orange">Contribute</div>
+          <div *ngIf="user._id === idea.authorId._id && user.username !== ''" (click)="saveChange()" class="btn red">Save Idea</div>
+            </div>
+          </div>
   </div>
 
   <div class="comment-container card">
@@ -22,7 +38,8 @@
         {{comment.content}}
         <div class="low-container">
             <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
-            <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+            <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
+            <button (click)="rateUp(comment._id)" class="green">+</button>
         </div>
       </div>
     </div>
@@ -31,7 +48,8 @@
               {{comment.content}}
               <div class="low-container">
                   <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
-                  <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+                  <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
+                  <button (click)="rateUp(comment._id)" class="green">+</button>
                 </div>
             </div>
           </div>
@@ -47,8 +65,9 @@
               {{comment.content}}
               <div class="low-container">
                   <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
-                  <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
-              </div>
+                  <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
+                  <button (click)="rateUp(comment._id)" class="green">+</button>
+                </div>
             </div>
     </div>
     <div *ngIf="allSim" class="low-container">
@@ -56,7 +75,8 @@
               {{comment.content}}
               <div class="low-container">
                   <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
-                  <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+                  <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
+                  <button (click)="rateUp(comment._id)" class="green">+</button>
               </div>
             </div>
           </div> 
@@ -72,7 +92,8 @@
                   {{comment.content}}
                   <div class="low-container">
                       <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
-                      <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+                      <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
+                      <button (click)="rateUp(comment._id)" class="green">+</button>
                     </div>
                 </div>
               </div>
@@ -81,12 +102,13 @@
                       {{comment.content}}
                       <div class="low-container">
                           <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
-                          <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+                          <button (click)="rateDown(comment._id)" class="red">-</button><span>{{comment.rating.length}}</span>
+                          <button (click)="rateUp(comment._id)" class="green">+</button>
                         </div>
                     </div>
                   </div>
+    </div>
 </div>
-
 <div *ngIf="contact" class="contact-form">
         <div class="row">
                 <div class="input-field col s6">

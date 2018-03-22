@@ -9,7 +9,6 @@ const User = require ('../models/User');
 router.get('/', function(req, res, next) {
     Idea.find()
     .populate("comments")
-    .populate("followers")
     .populate("authorId")
     .then(lists=>res.status(200).json(lists))
     .catch(e=>res.status(500).send(e));
@@ -18,11 +17,28 @@ router.get('/', function(req, res, next) {
 router.get('/rateup/:commentid/:authorid', function(req, res, next) {
     Comment.findById(req.params.commentid)
     .then(comment=>{
+        console.log(comment);
         if (comment.rating.indexOf(req.params.authorid)>=0){
             res.status(200).json(comment)
             .catch(e=>res.status(500).send(e));
         } else {
             comment.rating.push(req.params.authorid);
+            comment.save()
+            .then(com => res.status(200).json(comment)
+            .catch(e=>res.status(500).send(e)));
+        }
+    })
+});
+
+router.get('/ratedown/:commentid/:authorid', function(req, res, next) {
+    Comment.findById(req.params.commentid)
+    .then(comment=>{
+        console.log(comment);
+        if (comment.rating.indexOf(req.params.authorid)==-1){
+            res.status(200).json(comment)
+            .catch(e=>res.status(500).send(e));
+        } else {
+            comment.rating.splice(comment.rating.indexOf(req.params.authorid), 1);
             comment.save()
             .then(com => res.status(200).json(comment)
             .catch(e=>res.status(500).send(e)));
@@ -61,8 +77,7 @@ router.post('/contribute', function(req, res, next) {
         ideaId: req.body.ideaId,
         content: req.body.content,
         type: req.body.type,
-        link: req.body.link,
-        rating: 0
+        link: req.body.link
       });
       comment.save((err) => {
         User.findById(req.body.authorId, (error, user) => {
@@ -81,14 +96,31 @@ router.post('/contribute', function(req, res, next) {
                       array.push(comment._id)
                       idea.comments= array;
                         idea.save()
-                        .then(list=>res.status(201).json(list))
-                        .catch(e=>res.status(500).send(e));
+                        .then(idea=>res.status(201).json(idea))
                     }
                 })
               });
             }
         })
       });
+});
+
+router.post('/:userid/notify', function(req, res, next) {
+    User.findById(req.params.userid, (error, user) => {
+        if (error) {
+            next(error);
+        } else {
+            console.log("user",user, user.notifications, user.messages)
+          let arri=user.notifications
+          console.log("array", arri)
+          console.log(req.body)
+          arri.push(req.body)
+          user.notifications= arri;
+          console.log(user.notifications)
+          user.save()
+          .then(list=>res.status(201).json(list));
+        }
+    })
 });
 
 router.post('/contact', function(req, res, next) {
@@ -108,7 +140,6 @@ router.post('/contact', function(req, res, next) {
 router.get('/:id', function(req, res, next) {
     Idea.findById(req.params.id)
     .populate("comments")
-    .populate("followers")
     .populate("authorId")
     .then(ideas=>{
         Comment.find({ideaId: req.params.id})
@@ -119,6 +150,16 @@ router.get('/:id', function(req, res, next) {
             console.log(result);
             res.status(200).json(result);
         })
+    })
+});
+
+router.post('/:id', function(req, res, next) {
+    Idea.findById(req.params.id)
+    .then(idea=>{
+        idea.title = req.body.title;
+        idea.description = req.body.description;
+        idea.save()
+        .then(ideaUp =>res.status(200).json(ideaUp))
     })
 });
 

@@ -12,6 +12,7 @@ import { IdeaListComponent } from './idea-list/idea-list.component';
 import { CreateIdeaComponent } from './create-idea/create-idea.component';
 import { DisplayIdeaComponent } from './display-idea/display-idea.component';
 import { ContributeComponent } from './contribute/contribute.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,7 +30,8 @@ const routes: Routes = [
     IdeaListComponent,
     CreateIdeaComponent,
     DisplayIdeaComponent,
-    ContributeComponent
+    ContributeComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

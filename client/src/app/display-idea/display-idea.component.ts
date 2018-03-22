@@ -21,12 +21,15 @@ export class DisplayIdeaComponent implements OnInit {
     _id: ''
   };
 
+  id = this.route.snapshot.params['id'];
+
   idea = {
     title: '',
     description: '',
     authorId: {
       username: '',
-      picPath: ''
+      picPath: '',
+      id: ''
     },
     category: '',
     comments: [],
@@ -54,6 +57,8 @@ export class DisplayIdeaComponent implements OnInit {
   allSim = false;
 
   allRec = false;
+
+  edit = false;
 
   constructor(private session: SessionService, private router: Router, private ideas: IdeasService, private route: ActivatedRoute ) { }
 
@@ -91,6 +96,9 @@ export class DisplayIdeaComponent implements OnInit {
       (list) => {this.idea = list;
         console.log(this.idea);
         this.message.recId = list.authorId._id;
+        this.contributions = [];
+        this.similars = [];
+        this.recs = [];
         list.comments.forEach(comment => {
           if (comment.type  === 'comment') {
             this.contributions.unshift(comment);
@@ -112,6 +120,7 @@ export class DisplayIdeaComponent implements OnInit {
   successCb(user) {
     this.user = user;
     this.message.sendId = user._id;
+    console.log(this.user);
   }
 
 
@@ -164,5 +173,43 @@ export class DisplayIdeaComponent implements OnInit {
     this.ideas.rateUp(commentId, this.user._id).subscribe(
       (res) => this.update()
     );
+  }
+
+  rateDown(commentId) {
+    this.ideas.rateDown(commentId, this.user._id).subscribe(
+      (res) => this.update()
+    );
+  }
+
+  follow() {
+    this.ideas.follow(this.user._id, this.id)
+    .subscribe(
+      (res) => this.update()
+    );
+  }
+
+  unfollow() {
+    this.ideas.unfollow(this.user._id, this.id)
+    .subscribe(
+      (res) => this.update()
+    );
+  }
+
+  editChange() {
+    if (this.edit) {
+      this.edit = false;
+    } else {
+      this.edit = true;
+    }
+    console.log(this.edit);
+  }
+
+  saveChange() {
+    if (this.edit) {
+      this.edit = false;
+    } else {
+      this.edit = true;
+    }
+    this.ideas.updateIdea(this.route.snapshot.params['id'], this.idea).subscribe();
   }
 }

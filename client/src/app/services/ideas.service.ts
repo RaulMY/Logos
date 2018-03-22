@@ -74,4 +74,16 @@ option = { withCredentials: true};
       .map(res => res.json())
       .catch(this.handleError);
   }
+
+  updateIdea(id, info) {
+    return this.http.post(`http://localhost:1337/ideas/${id}`, info, this.option)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  notify(id, notification) {
+    return this.http.post(`http://localhost:1337/ideas/${id}/notify`, notification, this.option)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
 }

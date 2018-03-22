@@ -40,7 +40,8 @@ export class ContributeComponent implements OnInit {
     description: '',
     authorId: {
       username: '',
-      picPath: ''
+      picPath: '',
+      _id: ''
     },
     category: '',
     comments: [],
@@ -82,6 +83,8 @@ export class ContributeComponent implements OnInit {
   }
 
   createComment() {
+    this.ideas.notify(this.idea.authorId._id, {content: `${this.idea.title} got a new Contribution`})
+    .subscribe(not => {
     this.nuComment.type = 'comment';
     this.nuComment.content = this.contentComment;
     this.ideas.newComment(this.nuComment)
@@ -96,9 +99,12 @@ export class ContributeComponent implements OnInit {
         };
       }
     );
+  });
   }
 
   createRec() {
+    this.ideas.notify(this.idea.authorId._id, {content: `${this.idea.title} got a new Recommendation`})
+    .subscribe(not => {
     this.nuComment.type = 'rec';
     this.nuComment.content = this.contentRec;
     this.nuComment.link = this.linkRec;
@@ -114,25 +120,27 @@ export class ContributeComponent implements OnInit {
         };
       }
     );
+    });
   }
 
   createSim() {
-    this.nuComment.type = 'sim';
-    this.nuComment.content = this.contentSimilar;
-    this.nuComment.link = this.linkSimilar;
-    this.ideas.newComment(this.nuComment)
-    .subscribe(
-      (nuComment) => {
-        this.nuComment = {
-          authorId: '',
-          content: '',
-          link: '',
-          ideaId: this.route.snapshot.params['id'],
-          type: ''
-        };
-      }
-    );
+    this.ideas.notify(this.idea.authorId._id, {content: `${this.idea.title} got a new Similar`})
+    .subscribe(not => {
+      this.nuComment.type = 'sim';
+      this.nuComment.content = this.contentSimilar;
+      this.nuComment.link = this.linkSimilar;
+      this.ideas.newComment(this.nuComment)
+      .subscribe(
+        (nuComment) => {
+          this.nuComment = {
+            authorId: '',
+            content: '',
+            link: '',
+            ideaId: this.route.snapshot.params['id'],
+            type: ''
+          };
+        }
+      );
+    });
   }
-
-
 }
