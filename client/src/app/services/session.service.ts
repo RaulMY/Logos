@@ -40,6 +40,18 @@ option = { withCredentials: true};
       .catch(this.handleError);
   }
 
+  getUser(id) {
+    return this.http.get(`http://localhost:1337/auth/user/${id}`, this.option)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  updateUser(id, info) {
+    return this.http.post(`http://localhost:1337/auth/user/${id}`, info, this.option)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
   isLoggedInHome() {
     return this.http.get(`http://localhost:1337/auth/loggedinhome`, this.option)
       .map(res => res.json())

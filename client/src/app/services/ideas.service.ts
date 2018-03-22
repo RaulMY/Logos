@@ -56,4 +56,22 @@ option = { withCredentials: true};
       .map(res => res.json())
       .catch(this.handleError);
   }
+
+  sendMessage(message) {
+    return this.http.post(`http://localhost:1337/ideas/contact`, message, this.option)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  rateUp(commentId, authorId) {
+    return this.http.get(`http://localhost:1337/ideas/rateup/${commentId}/${authorId}`, this.option)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
+
+  rateDown(commentId, authorId) {
+    return this.http.get(`http://localhost:1337/ideas/ratedown/${commentId}/${authorId}`, this.option)
+      .map(res => res.json())
+      .catch(this.handleError);
+  }
 }

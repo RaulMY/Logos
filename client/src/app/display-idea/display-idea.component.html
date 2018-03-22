@@ -1,12 +1,12 @@
-<div id="main-container">
+<div id="main-container" *ngIf="!contact">
   <div class="idea-container card">
       <img [src]="'http://localhost:1337/'+idea.picPath+'.svg'" alt="Wait for it">
     
     <div class="info-container">  
-      <span><b>{{idea.title}}</b> by <b>{{idea.authorId.username}}</b></span>
+      <span><b>{{idea.title}}</b> by <a [routerLink]="['../user', idea.authorId._id]"><b>{{idea.authorId.username}}</b></a></span>
       <p>{{idea.description}}</p>
       <div class="low-container">
-    <div class="btn blue">Contact</div>
+    <div class="btn blue" (click)="toggleContact()">Contact</div>
     <div class="btn green">Follow | {{idea.followers.length}}</div>
       </div>
     </div>
@@ -15,54 +15,90 @@
   <div class="comment-container card">
     <div class="upper-container">
       <h5>Top Contributions</h5>
-      <div class="btn blue">See All</div>
+      <button (click)="toggleCon()" class="btn blue">See All</button>
     </div>
-    <div class="low-container">
-      <div class="idea card">
-        {{contributions[0].content}}
-      </div>
-      <div class="idea card">
-          {{contributions[1].content}}        
-      </div>
-      <div class="idea card">
-          {{contributions[2].content}}
+    <div *ngIf="!allCon" class="low-container">
+      <div class="idea card" *ngFor="let comment of contributions.slice(0,3)">
+        {{comment.content}}
+        <div class="low-container">
+            <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
+            <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+        </div>
       </div>
     </div>
+    <div *ngIf="allCon" class="low-container">
+            <div class="idea card" *ngFor="let comment of contributions">
+              {{comment.content}}
+              <div class="low-container">
+                  <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
+                  <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+                </div>
+            </div>
+          </div>
   </div>
 
   <div class="comment-container card">
       <div class="upper-container">
         <h5>Similar Projects</h5>
-        <div class="btn blue">See All</div>
+        <button (click)="toggleSim()" class="btn blue">See All</button>
       </div>
-      <div class="low-container">
-        <div class="idea card">
-          {{similars[0].content}}
-        </div>
-        <div class="idea card">
-            {{similars[1].content}}        
-        </div>
-        <div class="idea card">
-            {{similars[2].content}}
-        </div>
-      </div>
+      <div *ngIf="!allSim" class="low-container">
+            <div class="idea card" *ngFor="let comment of similars.slice(0,3)">
+              {{comment.content}}
+              <div class="low-container">
+                  <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
+                  <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+              </div>
+            </div>
+    </div>
+    <div *ngIf="allSim" class="low-container">
+            <div class="idea card" *ngFor="let comment of similars">
+              {{comment.content}}
+              <div class="low-container">
+                  <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
+                  <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+              </div>
+            </div>
+          </div> 
     </div>
 
     <div class="comment-container card">
         <div class="upper-container">
           <h5>Recommendations</h5>
-          <div class="btn blue">See All</div>
+          <button (click)="toggleRec()" class="btn blue">See All</button>
         </div>
-        <div class="low-container">
-          <div class="idea card">
-            {{recs[0].content}}
-          </div>
-          <div class="idea card">
-              {{recs[1].content}}        
-          </div>
-          <div class="idea card">
-              {{recs[2].content}}
-          </div>
-        </div>
-      </div>
+        <div *ngIf="!allRec" class="low-container">
+                <div class="idea card" *ngFor="let comment of recs.slice(0,3)">
+                  {{comment.content}}
+                  <div class="low-container">
+                      <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
+                      <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+                    </div>
+                </div>
+              </div>
+              <div *ngIf="allRec" class="low-container">
+                    <div class="idea card" *ngFor="let comment of recs">
+                      {{comment.content}}
+                      <div class="low-container">
+                          <span><a [routerLink]="['../user', comment.authorId._id]">{{comment.authorId.username}}</a></span>
+                          <button (click)="rateUp(comment._id)" class="green">+</button><span>{{comment.rating.length}}</span>
+                        </div>
+                    </div>
+                  </div>
+</div>
+
+<div *ngIf="contact" class="contact-form">
+        <div class="row">
+                <div class="input-field col s6">
+                  <input id="similar" type="text" class="validate" [(ngModel)] ="message.title">
+                  <label for="similar">Subject</label>
+                </div>
+              </div>
+              <div class="row">
+                  <div class="input-field col s6">
+                    <input id="linkSim" type="text" class="validate" [(ngModel)] ="message.content">
+                    <label for="linkSim">What do you want to say?</label>
+                  </div>
+                </div>
+              <div class="btn blue" (click)="sendMessage()">Send!</div>
 </div>

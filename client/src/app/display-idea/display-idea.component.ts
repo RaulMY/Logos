@@ -17,7 +17,8 @@ export class DisplayIdeaComponent implements OnInit {
     picPath: '',
     ideas: [],
     following: [],
-    comments: []
+    comments: [],
+    _id: ''
   };
 
   idea = {
@@ -35,37 +36,24 @@ export class DisplayIdeaComponent implements OnInit {
     picPath: 'images/svg/other'
   };
 
-  contributions = [
-    {content: 'Hey, we still need a comment!'},
-    {content: 'Hey, we still need a comment!'},
-    {content: 'Hey, we still need a comment!'}
-  ];
-  similars = [
-    {
-      content: 'Nothing here yet!',
-      link: '#'
-    },
-    {
-      content: 'Nothing here yet!',
-      link: '#'
-    },
-    {
-      content: 'Nothing here yet!',
-      link: '#'
-    }];
-  recs = [
-    {
-      content: 'Nothing here yet!',
-      link: '#'
-    },
-    {
-      content: 'Nothing here yet!',
-      link: '#'
-    },
-    {
-      content: 'Nothing here yet!',
-      link: '#'
-    }];
+  contributions = [];
+  similars = [];
+  recs = [];
+
+  contact = false;
+
+  message = {
+    title: '',
+    content: '',
+    recId: '',
+    sendId: ''
+  };
+
+  allCon = false;
+
+  allSim = false;
+
+  allRec = false;
 
   constructor(private session: SessionService, private router: Router, private ideas: IdeasService, private route: ActivatedRoute ) { }
 
@@ -77,6 +65,32 @@ export class DisplayIdeaComponent implements OnInit {
     this.ideas.getIdea(this.route.snapshot.params['id'])
     .subscribe(
       (list) => {this.idea = list;
+        console.log(this.idea);
+        this.message.recId = list.authorId._id;
+        list.comments.forEach(comment => {
+          if (comment.type  === 'comment') {
+            this.contributions.unshift(comment);
+          }
+        });
+        list.comments.forEach(comment => {
+          if (comment.type  === 'sim') {
+            this.similars.unshift(comment);
+          }
+        });
+        list.comments.forEach(comment => {
+          if (comment.type  === 'red') {
+            this.recs.unshift(comment);
+          }
+        });
+      });
+  }
+
+  update() {
+    this.ideas.getIdea(this.route.snapshot.params['id'])
+    .subscribe(
+      (list) => {this.idea = list;
+        console.log(this.idea);
+        this.message.recId = list.authorId._id;
         list.comments.forEach(comment => {
           if (comment.type  === 'comment') {
             this.contributions.unshift(comment);
@@ -97,17 +111,58 @@ export class DisplayIdeaComponent implements OnInit {
 
   successCb(user) {
     this.user = user;
+    this.message.sendId = user._id;
   }
 
-  update() {
-    this.session.isLoggedIn()
-      .subscribe(
-        (user) => this.successCb(user)
-      );
-    this.ideas.getIdea(this.route.snapshot.params['id'])
-    .subscribe(
-      (list) => this.idea = list
-      );
+
+  toggleContact() {
+    if (this.contact) {
+      this.contact = false;
+    } else {
+      this.contact = true;
+    }
+    console.log(this.contact);
   }
 
+  sendMessage() {
+    if (this.contact) {
+      this.contact = false;
+    } else {
+      this.contact = true;
+    }
+    this.ideas.sendMessage(this.message).subscribe();
+    this.message.title = '';
+    this.message.content = '';
+    console.log(this.message);
+  }
+
+  toggleCon() {
+    if (this.allCon) {
+      this.allCon = false;
+    } else {
+      this.allCon = true;
+    }
+  }
+
+  toggleSim() {
+    if (this.allSim) {
+      this.allSim = false;
+    } else {
+      this.allSim = true;
+    }
+  }
+
+  toggleRec() {
+    if (this.allRec) {
+      this.allRec = false;
+    } else {
+      this.allRec = true;
+    }
+  }
+
+  rateUp(commentId) {
+    this.ideas.rateUp(commentId, this.user._id).subscribe(
+      (res) => this.update()
+    );
+  }
 }

@@ -16,10 +16,10 @@ import { ContributeComponent } from './contribute/contribute.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home',  component: IdeaListComponent},
-  { path: 'profile', component: ProfileComponent},
   { path: 'new', component: CreateIdeaComponent},
   { path: ':id', component: DisplayIdeaComponent},
-  { path: ':id/contribute', component: ContributeComponent}
+  { path: ':id/contribute', component: ContributeComponent},
+  { path: 'user/:userid', component: ProfileComponent}
 ];
 
 @NgModule({

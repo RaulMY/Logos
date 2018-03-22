@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 
-.profile-container{
+.profile-container, .avatar-container{
     width: 95%;
     margin: 10px auto;
     background-color: white;
@@ -11,6 +11,8 @@
     border: 2px solid #5AB9EA;
     border-radius: 10px;
     align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .profile-container img{
@@ -45,4 +47,42 @@
     width: 30%;
     text-align: center;
     margin: 0 35%;
+}
+
+.title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+input[type=radio] {
+    display:none;
+    opacity: 0;
+}
+
+input[type=radio] + label {
+    opacity: 0.5;
+    height: 90px;
+    width: 90px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+    text-align: center
+}
+
+input[type=radio]:checked + label {
+    opacity: 1;
+    height: 90px;
+    width: 90px;
+    display:inline-block;
+    padding: 0 0 0 0px;
+    text-align: center
+}
+
+.avatar {
+    width: 100%;
+    padding: 5px;
+}
+
+[type="radio"]+label:before, [type="radio"]:not(.filled-in)+label:after{
+    display: none;
 }

@@ -116,4 +116,22 @@ authRoutes.post('/signup', (req, res, next) => {
     res.status(403).json({ message: 'Unauthorized' });
   });
 
+  authRoutes.get('/user/:id', (req, res, next) => {
+      User.findById(req.params.id)
+      .populate("ideas")
+      .populate("following")
+      .populate("comments")
+      .then(user => res.status(200).json(user));
+  });
+
+  authRoutes.post('/user/:id', (req, res, next) => {
+    User.findById(req.params.id)
+    .then(user => {
+      user.username=req.body.username;
+      user.picPath=req.body.picPath;
+      user.description=req.body.description;
+      user.save().then(user => 
+        res.status(200).json(user))
+    });
+});
   module.exports = authRoutes;

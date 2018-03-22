@@ -12,7 +12,8 @@ const userSchema = new Schema({
   ideas: [{ type: Schema.Types.ObjectId, ref: 'Idea' }],
   password: String, 
   following: [{ type: Schema.Types.ObjectId, ref: 'Idea' }],
-  comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }]
+  comments : [{ type: Schema.Types.ObjectId, ref: 'Comment' }],
+  messages: []
 });
 
 

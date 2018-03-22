@@ -1,8 +1,10 @@
 <div id="main-container">
-  <h3>Profile</h3>
-  <div class="profile-container">
-    <img *ngIf="user.picpath" [alt]="user.username" [src]="user.picpath" >
-    <img *ngIf="!user.picpath" [alt]="user.username" src="http://www.rajitunion.com/manageadmin/photo_gallery/no-image.gif" >
+  <div class="title">
+  <h3>Profile</h3> <button class="btn green"(click)="editChange()" *ngIf="loggedUser._id==user._id && !edit">Edit Profile</button>
+  <button class="btn red"(click)="saveChange()" *ngIf="loggedUser._id==user._id && edit">Save Profile</button></div>
+  <div *ngIf="!edit" class="profile-container">
+      <img *ngIf="user.picPath" [alt]="user.username" [src]="'http://localhost:1337/'+user.picPath" >
+      <img *ngIf="!user.picPath" [alt]="user.username" src="http://www.rajitunion.com/manageadmin/photo_gallery/no-image.gif" >
     <div id="profile-info">
       <span>{{user.username}}</span>
       <div id="desc-area">
@@ -15,11 +17,54 @@
       <span>No Github Linked</span>
     </div>
   </div>
+  <div *ngIf="edit" class="profile-container">
+      <img *ngIf="user.picPath" [alt]="user.username" [src]="'http://localhost:1337/'+user.picPath" >
+      <img *ngIf="!user.picPath" [alt]="user.username" src="http://www.rajitunion.com/manageadmin/photo_gallery/no-image.gif" >
+      <div id="profile-info">
+        <label>Username</label>
+        <input [(ngModel)]='user.username' />
+        <div id="desc-area">
+            <label>Description</label>
+          <input [(ngModel)]='user.description' placeholder="Tell us a bit about yourself"/>
+        </div>
+      </div>
+      <div id="profile-social">
+        <span>No Twitter Linked</span>
+        <span>No Linkedin Linked</span>
+        <span>No Github Linked</span>
+      </div>
+    </div>
+  <div *ngIf="edit" class="avatar-container">
+      <input type="radio" name="avatar" id="1" (change)='newValue(value)' value="1" [(ngModel)]="value" /><label for="1"><img class="avatar" src="http://localhost:1337/images/avatars/user-1.svg"></label>
+      <input type="radio" name="avatar" id="2" (change)='newValue(value)' value="2" [(ngModel)]="value" /><label for="2"><img class="avatar" src="http://localhost:1337/images/avatars/user-2.svg"></label>
+      <input type="radio" name="avatar" id="3" (change)='newValue(value)' value="3" [(ngModel)]="value" /><label for="3"><img class="avatar" src="http://localhost:1337/images/avatars/user-3.svg"></label>
+      <input type="radio" name="avatar" id="4" (change)='newValue(value)' value="4" [(ngModel)]="value" /><label for="4"><img class="avatar" src="http://localhost:1337/images/avatars/user-4.svg"></label>
+      <input type="radio" name="avatar" id="5" (change)='newValue(value)' value="5" [(ngModel)]="value" /><label for="5"><img class="avatar" src="http://localhost:1337/images/avatars/user-5.svg"></label>
+      <input type="radio" name="avatar" id="6" (change)='newValue(value)' value="6" [(ngModel)]="value" /><label for="6"><img class="avatar" src="http://localhost:1337/images/avatars/user-6.svg"></label>
+      <input type="radio" name="avatar" id="7" (change)='newValue(value)' value="7" [(ngModel)]="value" /><label for="7"><img class="avatar" src="http://localhost:1337/images/avatars/user-7.svg"></label>
+      <input type="radio" name="avatar" id="8" (change)='newValue(value)' value="8" [(ngModel)]="value" /><label for="8"><img class="avatar" src="http://localhost:1337/images/avatars/user-8.svg"></label>
+      <input type="radio" name="avatar" id="9" (change)='newValue(value)' value="9" [(ngModel)]="value" /><label for="9"><img class="avatar" src="http://localhost:1337/images/avatars/user-9.svg"></label>
+      <input type="radio" name="avatar" id="10" (change)='newValue(value)' value="10" [(ngModel)]="value" /><label for="10"><img class="avatar" src="http://localhost:1337/images/avatars/user-10.svg"></label>
+      <input type="radio" name="avatar" id="11" (change)='newValue(value)' value="11" [(ngModel)]="value" /><label for="11"><img class="avatar" src="http://localhost:1337/images/avatars/user-11.svg"></label>
+      <input type="radio" name="avatar" id="12" (change)='newValue(value)' value="12" [(ngModel)]="value" /><label for="12"><img class="avatar" src="http://localhost:1337/images/avatars/user-12.svg"></label>
+      <input type="radio" name="avatar" id="13" (change)='newValue(value)' value="13" [(ngModel)]="value" /><label for="13"><img class="avatar" src="http://localhost:1337/images/avatars/user-13.svg"></label>
+      <input type="radio" name="avatar" id="14" (change)='newValue(value)' value="14" [(ngModel)]="value" /><label for="14"><img class="avatar" src="http://localhost:1337/images/avatars/user-14.svg"></label>
+      <input type="radio" name="avatar" id="15" (change)='newValue(value)' value="15" [(ngModel)]="value" /><label for="15"><img class="avatar" src="http://localhost:1337/images/avatars/user-15.svg"></label>
+      <input type="radio" name="avatar" id="16" (change)='newValue(value)' value="16" [(ngModel)]="value" /><label for="16"><img class="avatar" src="http://localhost:1337/images/avatars/user-16.svg"></label>
+      <input type="radio" name="avatar" id="17" (change)='newValue(value)' value="17" [(ngModel)]="value" /><label for="17"><img class="avatar" src="http://localhost:1337/images/avatars/user-17.svg"></label>
+      <input type="radio" name="avatar" id="18" (change)='newValue(value)' value="18" [(ngModel)]="value" /><label for="18"><img class="avatar" src="http://localhost:1337/images/avatars/user-18.svg"></label>
+      <input type="radio" name="avatar" id="19" (change)='newValue(value)' value="19" [(ngModel)]="value" /><label for="19"><img class="avatar" src="http://localhost:1337/images/avatars/user-19.svg"></label>
+      <input type="radio" name="avatar" id="20" (change)='newValue(value)' value="20" [(ngModel)]="value" /><label for="20"><img class="avatar" src="http://localhost:1337/images/avatars/user-20.svg"></label>
+      <input type="radio" name="avatar" id="21" (change)='newValue(value)' value="21" [(ngModel)]="value" /><label for="21"><img class="avatar" src="http://localhost:1337/images/avatars/user-21.svg"></label>
+      <input type="radio" name="avatar" id="22" (change)='newValue(value)' value="22" [(ngModel)]="value" /><label for="22"><img class="avatar" src="http://localhost:1337/images/avatars/user-22.svg"></label>
+      <input type="radio" name="avatar" id="23" (change)='newValue(value)' value="23" [(ngModel)]="value" /><label for="23"><img class="avatar" src="http://localhost:1337/images/avatars/user-23.svg"></label>
+      <input type="radio" name="avatar" id="24" (change)='newValue(value)' value="24" [(ngModel)]="value" /><label for="24"><img class="avatar" src="http://localhost:1337/images/avatars/user-24.svg"></label>
+    </div>
   <h3>Ideas</h3>
   <div class="profile-container">
     <span class="centered" *ngIf="user.ideas.length === 0">No Ideas so far, share one!</span>
     <ul *ngFor="let idea of user.ideas">
-      <a [routerLink]="['../', idea._id]">{{idea.title}}</a>
+      <a [routerLink]="['../../', idea._id]">{{idea.title}}</a>
     </ul>
   </div>
   <h3>Following</h3>

@@ -15,6 +15,21 @@ router.get('/', function(req, res, next) {
     .catch(e=>res.status(500).send(e));
 });
 
+router.get('/rateup/:commentid/:authorid', function(req, res, next) {
+    Comment.findById(req.params.commentid)
+    .then(comment=>{
+        if (comment.rating.indexOf(req.params.authorid)>=0){
+            res.status(200).json(comment)
+            .catch(e=>res.status(500).send(e));
+        } else {
+            comment.rating.push(req.params.authorid);
+            comment.save()
+            .then(com => res.status(200).json(comment)
+            .catch(e=>res.status(500).send(e)));
+        }
+    })
+});
+
 router.post('/new', function(req, res, next) {
     const idea = new Idea({
         authorId: req.user._id,
@@ -76,16 +91,35 @@ router.post('/contribute', function(req, res, next) {
       });
 });
 
+router.post('/contact', function(req, res, next) {
+        User.findById(req.body.recId, (error, user) => {
+            if (error) {
+                next(error);
+            } else {
+              let array=user.messages
+              array.push(req.body)
+              user.messages= array;
+              user.save()
+              .then(list=>res.status(201).json(list));
+            }
+        })
+});
+
 router.get('/:id', function(req, res, next) {
     Idea.findById(req.params.id)
     .populate("comments")
     .populate("followers")
     .populate("authorId")
-    .then(lists=>{
-        console.log(lists);
-        res.status(200).json(lists);
+    .then(ideas=>{
+        Comment.find({ideaId: req.params.id})
+        .populate("authorId")
+        .then(comments=>{
+            let result = ideas;
+            result.comments=comments;
+            console.log(result);
+            res.status(200).json(result);
+        })
     })
-    .catch(e=>res.status(500).send(e));
 });
 
 router.post('/follow', function(req, res, next) {
